@@ -104,6 +104,9 @@ def main():
     with read_write(config):
         edit_config(config, args)
 
+    print(OmegaConf.to_yaml(config))
+    exit(0)
+
     execute_exp(config, args.run_type)
 
 

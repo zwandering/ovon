@@ -124,12 +124,11 @@ class NavmeshSettings:
 @dataclass
 class OVONSimulatorConfig(SimulatorConfig):
     type: str = "OVONSim-v0"
-    navmesh_settings: NavmeshSettings = NavmeshSettings()
-
+    navmesh_settings: NavmeshSettings = field(default_factory=lambda: NavmeshSettings())
 
 @dataclass
 class OVONHabitatConfig(HabitatConfig):
-    simulator: SimulatorConfig = OVONSimulatorConfig()
+    simulator: SimulatorConfig = field(default_factory=lambda: OVONSimulatorConfig())
 
 
 ##########################################################################
@@ -189,7 +188,7 @@ class OVONPolicyConfig(PolicyConfig):
 
     unfreeze_xattn: bool = False
 
-    finetune: PolicyFinetuneConfig = PolicyFinetuneConfig()
+    finetune: PolicyFinetuneConfig = field(default_factory=lambda: PolicyFinetuneConfig())
 
     transformer_config: TransformerConfig = field(
         default_factory=lambda: TransformerConfig()
@@ -198,12 +197,12 @@ class OVONPolicyConfig(PolicyConfig):
 
 @dataclass
 class OVONRLConfig(RLConfig):
-    policy: OVONPolicyConfig = OVONPolicyConfig()
+    policy: OVONPolicyConfig = field(default_factory=lambda: OVONPolicyConfig())
 
 
 @dataclass
 class OVONBaselinesRLConfig(HabitatBaselinesRLConfig):
-    rl: OVONRLConfig = OVONRLConfig()
+    rl: OVONRLConfig = field(default_factory=lambda: OVONRLConfig())
 
 
 # Register configs to config store
